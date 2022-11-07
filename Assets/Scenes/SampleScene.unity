@@ -330,10 +330,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad31deb8fbbb0e14390f88780ea3dee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 1aeeb66f02d36ff49b12bcf00796a7ad, type: 2}
   xSpacing: 1
   zSpacing: 1
   nodeAmountX: 10
   nodeAmountZ: 10
+  frequency: 1
+  amplitude: 2
 --- !u!4 &1880959643
 Transform:
   m_ObjectHideFlags: 0
