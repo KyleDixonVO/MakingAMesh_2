@@ -14,6 +14,8 @@ public class MeshMaker : MonoBehaviour
     int currentVertex;
     int currentTriangleIndex;
 
+    public bool showGizmos;
+
     public float xSpacing = 1;
     public float zSpacing = 1;
     public int nodeAmountX = 10;
@@ -36,6 +38,7 @@ public class MeshMaker : MonoBehaviour
         ApplyPerlinNoise();
         UpdateMesh();
         gameObject.GetComponent<MeshRenderer>().material = material;
+        showGizmos = true;
     }
 
     // Update is called once per frame
@@ -48,6 +51,11 @@ public class MeshMaker : MonoBehaviour
             MakeShape();
             ApplyPerlinNoise();
             UpdateMesh();
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            showGizmos = !showGizmos;
         }
     }
 
@@ -72,7 +80,7 @@ public class MeshMaker : MonoBehaviour
         for (int x = 0; x < newVerticies.Length; x++)
         {
             Debug.Log("Making triangles from node: " + x);
-            if (x == 9 || x == 19 || x == 29 || x == 39 || x == 49 || x == 59 || x == 69 || x == 79 || x == 89 || x == 99) continue;
+            if ((x + 1) % nodeAmountX == 0) continue;
             if (((x - (nodeAmountX - 2)) % nodeAmountX) == 0 && x != 0) // check if vertex is second to last on the right edge of plane
             {
                 Debug.Log("Right" + x);
@@ -201,7 +209,7 @@ public class MeshMaker : MonoBehaviour
     {
         for (int i = 0; i < newVerticies.Length; i++)
         {
-            newVerticies[i] = new Vector3(newVerticies[i].x, PerlinNoise(Time.time * frequency, Random.Range(0.0f, 10.0f)), newVerticies[i].z);
+            newVerticies[i] = new Vector3(newVerticies[i].x, PerlinNoise(Time.time * frequency, Random.Range(0.0f, 10.0f)) * amplitude, newVerticies[i].z);
             i++;
         }
     }
@@ -213,6 +221,7 @@ public class MeshMaker : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (showGizmos == false) return;
         for(int i = 0; i < newVerticies.Length; i++) 
         {
             if (i % 5 == 0)
