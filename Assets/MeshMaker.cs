@@ -21,7 +21,7 @@ public class MeshMaker : MonoBehaviour
     public int nodeAmountX = 10;
     public int nodeAmountZ = 10;
     public float frequency;
-    public float amplitude;
+    private float amplitude;
 
     public float[,] Coordinates;
 
@@ -38,7 +38,7 @@ public class MeshMaker : MonoBehaviour
         ApplyPerlinNoise();
         UpdateMesh();
         gameObject.GetComponent<MeshRenderer>().material = material;
-        showGizmos = true;
+        showGizmos = false;
     }
 
     // Update is called once per frame
@@ -47,7 +47,6 @@ public class MeshMaker : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Coordinates = new float[nodeAmountX, nodeAmountX];
-            mesh = new Mesh();
             MakeShape();
             ApplyPerlinNoise();
             UpdateMesh();
@@ -209,6 +208,7 @@ public class MeshMaker : MonoBehaviour
     {
         for (int i = 0; i < newVerticies.Length; i++)
         {
+            amplitude = 1 / frequency;
             newVerticies[i] = new Vector3(newVerticies[i].x, PerlinNoise(Time.time * frequency, Random.Range(0.0f, 10.0f)) * amplitude, newVerticies[i].z);
             i++;
         }
