@@ -6,7 +6,7 @@ using UnityEngine;
 public class MeshMaker : MonoBehaviour
 {
 
-    Vector3[] newVerticies;
+    public Vector3[] newVerticies;
     Vector2[] newUV;
     int[] newTriangles;
     Mesh mesh;
@@ -52,10 +52,10 @@ public class MeshMaker : MonoBehaviour
             UpdateMesh();
         }
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            showGizmos = !showGizmos;
-        }
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    showGizmos = !showGizmos;
+        //}
     }
 
     void MakeShape()
@@ -78,99 +78,99 @@ public class MeshMaker : MonoBehaviour
 
         for (int x = 0; x < newVerticies.Length; x++)
         {
-            Debug.Log("Making triangles from node: " + x);
+            //Debug.Log("Making triangles from node: " + x);
             if ((x + 1) % nodeAmountX == 0) continue;
             if (((x - (nodeAmountX - 2)) % nodeAmountX) == 0 && x != 0) // check if vertex is second to last on the right edge of plane
             {
-                Debug.Log("Right" + x);
+                //Debug.Log("Right" + x);
                 if (x >= (nodeAmountX * (nodeAmountZ - 1))) // check if vertex is on bottom edge of plane
                 {
-                    Debug.Log("Bottom Row");
+                    //Debug.Log("Bottom Row");
                     continue;
                 }
                 else
                 {
                     newTriangles[currentTriangleIndex] = (x);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                     newTriangles[currentTriangleIndex] = (x + nodeAmountX - 1);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                     newTriangles[currentTriangleIndex] = (x + nodeAmountX);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
 
                     newTriangles[currentTriangleIndex] = (x);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                     newTriangles[currentTriangleIndex] = (x + nodeAmountX);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                     newTriangles[currentTriangleIndex] = (x + nodeAmountX + 1);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
 
                     newTriangles[currentTriangleIndex] = (x);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                     newTriangles[currentTriangleIndex] = (x + nodeAmountX + 1);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                     newTriangles[currentTriangleIndex] = (x + 1);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
 
                 }
             }
             else if (x % (nodeAmountX) == 0 && x != 1 || x == 0) // check if vertex is on left edge of plane
             {
-                Debug.Log("Left" + x);
+                //Debug.Log("Left" + x);
                 if (x >= (nodeAmountX * (nodeAmountZ - 1))) // check if vertex is on bot
                 {
-                    Debug.Log("Bottom Row");
+                    //Debug.Log("Bottom Row");
                     continue;
                 }
                 else
                 {
                     newTriangles[currentTriangleIndex] = (x);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                     newTriangles[currentTriangleIndex] = (x + nodeAmountX);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                     newTriangles[currentTriangleIndex] = (x + 1);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                 }
             }
             else
             {
-                Debug.Log("Center");
+                //Debug.Log("Center");
                 if (x >= nodeAmountX * ((nodeAmountZ - 1))) // check if vertex is on bottom edge of plane
                 {
-                    Debug.Log("Bottom Row");
+                    //Debug.Log("Bottom Row");
                     continue;
                 }
                 else
                 {
                     newTriangles[currentTriangleIndex] = (x);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                     newTriangles[currentTriangleIndex] = (x + nodeAmountX -1 );
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                     newTriangles[currentTriangleIndex] = (x + nodeAmountX);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
 
                     newTriangles[currentTriangleIndex] = (x);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                     newTriangles[currentTriangleIndex] = (x + nodeAmountX);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                     newTriangles[currentTriangleIndex] = (x + 1);
-                    Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
+                    //Debug.Log(newTriangles[currentTriangleIndex] + " " + currentTriangleIndex);
                     currentTriangleIndex++;
                 }
             }
@@ -179,7 +179,7 @@ public class MeshMaker : MonoBehaviour
         //UpdateMesh();
     }
 
-    void UpdateMesh()
+    public void UpdateMesh()
     {
         mesh.Clear();
         mesh.vertices = newVerticies;
@@ -222,9 +222,21 @@ public class MeshMaker : MonoBehaviour
     private void OnDrawGizmos()
     {
         if (showGizmos == false) return;
-        for(int i = 0; i < newVerticies.Length; i++) 
+        for (int i = 0; i < newVerticies.Length; i++)
         {
-            if (i % 5 == 0)
+            if (i == 0)
+            {
+                Gizmos.color = Color.cyan;
+            }
+            else if (i == 1)
+            {
+                Gizmos.color = Color.magenta;
+            }
+            else if (i % 10 == 0)
+            {
+                Gizmos.color = Color.yellow;
+            }
+            else if (i % 5 == 0)
             {
                 Gizmos.color = Color.blue;
             }
