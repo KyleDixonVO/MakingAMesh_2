@@ -30,6 +30,7 @@ public class MakerParent : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             MeshStitcher.stitcher.StitchMeshes();
+            MeshStitcher.stitcher.StitchCorners();
         }
     }
 

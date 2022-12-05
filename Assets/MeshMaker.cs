@@ -208,7 +208,7 @@ public class MeshMaker : MonoBehaviour
     {
         for (int i = 0; i < newVerticies.Length; i++)
         {
-            amplitude = 1 / frequency;
+            amplitude = (1 / frequency);
             newVerticies[i] = new Vector3(newVerticies[i].x, PerlinNoise(Time.time * frequency, Random.Range(0.0f, 10.0f)) * amplitude, newVerticies[i].z);
             i++;
         }

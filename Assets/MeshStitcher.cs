@@ -34,11 +34,11 @@ public class MeshStitcher : MonoBehaviour
                     if (mesh < makerParent.meshesPerRow && mesh % (makerParent.meshesPerRow) == 0) continue; // mesh is bottom left corner
                     else if (mesh < makerParent.meshesPerRow) //mesh is on bottom edge of array
                     {
-                        BL += makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y;
-                        BL += makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().nodeAmountX - 1)].y;
-                        BL = BL / 2;
-                        makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = BL;
-                        makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().nodeAmountX - 1)].y = BL;
+                        //BL += makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y;
+                        //BL += makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().nodeAmountX - 1)].y;
+                        //BL = BL / 2;
+                        //makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = BL;
+                        //makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().nodeAmountX - 1)].y = BL;
 
                     }
                     else if (mesh % (makerParent.meshesPerRow) == 0) // mesh on left edge of array
@@ -46,21 +46,22 @@ public class MeshStitcher : MonoBehaviour
                         BL += makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y;
                         BL += makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountZ - 1))].y;
                         BL = BL / 2;
-                        makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = BL;
-                        makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountZ - 1))].y = BL;
+                        makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountZ - 1))].y; ;
+                        //makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountZ - 1))].y = BL;
+                        Debug.Log("Mesh: " + (mesh - makerParent.meshesPerRow) + " Top left height: " + makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountZ - 1))].y);
                     }
-                    else
-                    {
-                        BL += makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y;
-                        BL += makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountX - 1))].y;
-                        BL += makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().nodeAmountX - 1)].y;
-                        BL += BL += makerParent.meshMakers[mesh - (makerParent.meshesPerRow + 1)].GetComponent<MeshMaker>().newVerticies[x + ((makerParent.meshMakers[mesh - (makerParent.meshesPerRow + 1)].GetComponent<MeshMaker>().nodeAmountX * makerParent.meshMakers[mesh - (makerParent.meshesPerRow + 1)].GetComponent<MeshMaker>().nodeAmountZ) -1)].y;
-                        BL = BL / 4;
-                        makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = BL;
-                        makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountZ - 1))].y = BL;
-                        makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().nodeAmountX - 1)].y = BL;
-                        makerParent.meshMakers[mesh - (makerParent.meshesPerRow + 1)].GetComponent<MeshMaker>().newVerticies[x + ((makerParent.meshMakers[mesh - (makerParent.meshesPerRow + 1)].GetComponent<MeshMaker>().nodeAmountX * makerParent.meshMakers[mesh - (makerParent.meshesPerRow + 1)].GetComponent<MeshMaker>().nodeAmountZ) - 1)].y = BL;
-                    }
+                    //else
+                    //{
+                    //    BL += makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y;
+                    //    BL += makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountX - 1))].y;
+                    //    BL += makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().nodeAmountX - 1)].y;
+                    //    BL += BL += makerParent.meshMakers[mesh - (makerParent.meshesPerRow + 1)].GetComponent<MeshMaker>().newVerticies[x + ((makerParent.meshMakers[mesh - (makerParent.meshesPerRow + 1)].GetComponent<MeshMaker>().nodeAmountX * makerParent.meshMakers[mesh - (makerParent.meshesPerRow + 1)].GetComponent<MeshMaker>().nodeAmountZ) - 1)].y;
+                    //    BL = BL / 4;
+                    //    makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = BL;
+                    //    makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().nodeAmountZ - 1))].y = BL;
+                    //    makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[x + (makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().nodeAmountX - 1)].y = BL;
+                    //    makerParent.meshMakers[mesh - (makerParent.meshesPerRow + 1)].GetComponent<MeshMaker>().newVerticies[x + ((makerParent.meshMakers[mesh - (makerParent.meshesPerRow + 1)].GetComponent<MeshMaker>().nodeAmountX * makerParent.meshMakers[mesh - (makerParent.meshesPerRow + 1)].GetComponent<MeshMaker>().nodeAmountZ) - 1)].y = BL;
+                    //}
                 }
                 else if (x == (makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountZ) - 1) // top right
                 {
@@ -96,40 +97,69 @@ public class MeshStitcher : MonoBehaviour
                 }
                 else if (x == (makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountZ - 1) -1)) // top left
                 {
-                    if (mesh >= makerParent.meshesPerRow * (makerParent.numberOfRows - 1) && mesh % (makerParent.meshesPerRow) == 0) continue; // mesh is top left corner
-                    else if (mesh >= makerParent.meshesPerRow * (makerParent.numberOfRows - 1)) // mesh is on top edge of array
-                    {
-                        TL += makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y;
-                        TL += makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[(makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountZ) - 1)].y;
-                        TL = TL / 2;
-                        makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = TL;
-                        makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[(makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountZ) - 1)].y = TL;
+                    //if (mesh >= makerParent.meshesPerRow * (makerParent.numberOfRows - 1) && mesh % (makerParent.meshesPerRow) == 0) continue; // mesh is top left corner
+                    //else if (mesh >= makerParent.meshesPerRow * (makerParent.numberOfRows - 1)) // mesh is on top edge of array
+                    //{
+                    //    TL += makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y;
+                    //    TL += makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[((makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountZ)) - 1)].y;
+                    //    TL = TL / 2;
+                    //    makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = TL;
+                    //    makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[(makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountZ) - 1)].y = TL;
 
-                    }
-                    else if (mesh % (makerParent.meshesPerRow) == 0) // mesh on left edge of array
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
+                    //}
+                    //else if (mesh % (makerParent.meshesPerRow) == 0) // mesh on left edge of array
+                    //{
+                    //    TL += makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y;
+                    //    TL += makerParent.meshMakers[mesh + (makerParent.meshesPerRow)].GetComponent<MeshMaker>().newVerticies[0].y;
+                    //    TL = TL / 2;
+                    //    makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = TL;
+                    //    makerParent.meshMakers[mesh + (makerParent.meshesPerRow)].GetComponent<MeshMaker>().newVerticies[0].y = TL;
+                    //}
+                    //else
+                    //{
+                    //    TL += makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y;
+                    //    TL += makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[(makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountZ) - 1)].y;
+                    //    TL += makerParent.meshMakers[mesh + (makerParent.meshesPerRow)].GetComponent<MeshMaker>().newVerticies[0].y;
+                    //    TL += makerParent.meshMakers[mesh + (makerParent.meshesPerRow - 1)].GetComponent<MeshMaker>().newVerticies[makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX - 1].y;
+                    //    TL = TL / 4;
+                    //    makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = TL;
+                    //    makerParent.meshMakers[mesh - 1].GetComponent<MeshMaker>().newVerticies[(makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * (makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountZ) - 1)].y = TL;
+                    //    makerParent.meshMakers[mesh + (makerParent.meshesPerRow)].GetComponent<MeshMaker>().newVerticies[0].y = TL;
+                    //    makerParent.meshMakers[mesh + (makerParent.meshesPerRow - 1)].GetComponent<MeshMaker>().newVerticies[makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX - 1].y = TL;
+                    //}
                 }
                 else if (x == makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX - 1) // bottom right
                 {
-                    if (mesh < makerParent.meshesPerRow && (mesh + 1) % makerParent.meshesPerRow == 0) continue; //mesh is bottom right corner
-                    else if (mesh < makerParent.meshesPerRow) //mesh is on bottom edge of array
-                    {
-                        
-                    }
-                    else if ((mesh + 1) % makerParent.meshesPerRow == 0) // mesh on right edge of array
-                    {
+                    //if (mesh < makerParent.meshesPerRow && (mesh + 1) % makerParent.meshesPerRow == 0) continue; //mesh is bottom right corner
+                    //else if (mesh < makerParent.meshesPerRow) //mesh is on bottom edge of array
+                    //{
+                    //    BR += makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y;
+                    //    BR += makerParent.meshMakers[mesh + 1].GetComponent<MeshMaker>().newVerticies[0].y;
+                    //    BR = BR / 2;
+                    //    makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = BR;
+                    //    makerParent.meshMakers[mesh + 1].GetComponent<MeshMaker>().newVerticies[0].y = BR;
 
-                    }
-                    else
-                    {
-
-                    }
+                    //}
+                    //else if ((mesh + 1) % makerParent.meshesPerRow == 0) // mesh on right edge of array
+                    //{
+                    //    BR += makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y;
+                    //    BR += makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[(makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX) - 1].y;
+                    //    BR = BR / 2;
+                    //    makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = BR;
+                    //    makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[(makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX) - 1].y = BR;
+                    //}
+                    //else
+                    //{
+                    //    BR += makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y;
+                    //    BR += makerParent.meshMakers[mesh + 1].GetComponent<MeshMaker>().newVerticies[0].y;
+                    //    BR += makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[(makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX) - 1].y;
+                    //    BR += makerParent.meshMakers[mesh - (makerParent.meshesPerRow -1)].GetComponent<MeshMaker>().newVerticies[(makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX - 1) -1].y;
+                    //    BR = BR / 4;
+                    //    makerParent.meshMakers[mesh].GetComponent<MeshMaker>().newVerticies[x].y = BR;
+                    //    makerParent.meshMakers[mesh + 1].GetComponent<MeshMaker>().newVerticies[0].y = BR;
+                    //    makerParent.meshMakers[mesh - makerParent.meshesPerRow].GetComponent<MeshMaker>().newVerticies[(makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX) - 1].y = BR;
+                    //    makerParent.meshMakers[mesh - (makerParent.meshesPerRow - 1)].GetComponent<MeshMaker>().newVerticies[(makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX * makerParent.meshMakers[mesh].GetComponent<MeshMaker>().nodeAmountX - 1) - 1].y = BR;
+                    //}
 
                 }
                 else continue;
