@@ -60,6 +60,7 @@ public class MakerParent : MonoBehaviour
                 meshMakers[meshNum].GetComponent<MeshMaker>().zSpacing = zSpacing;
                 meshMakers[meshNum].transform.position = new Vector3(j * xSpacing * (squaresPerMeshLength), 0, i * zSpacing * (squaresPerMeshLength));
                 meshMakers[meshNum].GetComponent<MeshMaker>().amplitude = amplitude;
+                meshMakers[meshNum].GetComponent<MeshMaker>().frequency = frequency;
                 meshMakers[meshNum].GetComponent<MeshMaker>().numberOfIterations = numberOfSpectralIterations;
                 meshMakers[meshNum].GetComponent<MeshMaker>().spectralMultiplier = spectralMultiplier;
                 meshNum++;

@@ -41,7 +41,6 @@ public class MeshMaker : MonoBehaviour
         UpdateMesh();
         gameObject.GetComponent<MeshRenderer>().material = material;
         showGizmos = false;
-        amplitude = 2;
     }
 
     // Update is called once per frame
@@ -211,14 +210,14 @@ public class MeshMaker : MonoBehaviour
     {
         for (int i = 0; i < newVerticies.Length; i++)
         {
-            newVerticies[i] = new Vector3(newVerticies[i].x, PerlinSpectral(Time.time , newVerticies[i].z, amplitude, frequency, numberOfIterations, spectralMultiplier), newVerticies[i].z);
+            newVerticies[i] = new Vector3(newVerticies[i].x, PerlinSpectral(Time.time * newVerticies[i].x, newVerticies[i].z, amplitude, frequency, numberOfIterations, spectralMultiplier), newVerticies[i].z);
             i++;
         }
     }
 
     float PerlinNoise(float x, float z, float frequency, float amplitude)
     {
-        return ((Mathf.PerlinNoise(x * frequency, z * frequency) * 2.0f) - 1f) * amplitude;
+        return ((Mathf.PerlinNoise(x * frequency, z) * 2.0f) - 1f) * amplitude;
     }
 
     float PerlinTurbulence(float x, float z, float frequency, float amplitude)
@@ -229,9 +228,13 @@ public class MeshMaker : MonoBehaviour
     float PerlinSpectral(float x, float z, float amplitude, float frequency, int numberOfIterations, float spectralMultiplier)
     {
         float result = 0.0f;
+        float newFrequency = frequency;
+        float newAmplitude = amplitude;
         for (int i = 0; i < numberOfIterations; i++)
         {
-            result += PerlinTurbulence(x, z, frequency, amplitude) * (frequency/((float)numberOfIterations * spectralMultiplier));
+            newFrequency = frequency * numberOfIterations * spectralMultiplier;
+            newAmplitude = amplitude / (numberOfIterations * spectralMultiplier);
+            result += PerlinTurbulence(x, z, newFrequency, newAmplitude);
             Debug.Log(result);
         }
         return result;

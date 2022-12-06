@@ -569,13 +569,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshMakerPrefab: {fileID: 7226527426373470387, guid: ec4575bd13269924f8bd4dc92e8b6c8f, type: 3}
   squaresPerMeshLength: 10
-  frequency: 0.25
+  frequency: 0.05
   xSpacing: 1
   zSpacing: 1
   meshesPerRow: 10
   numberOfRows: 10
-  numberOfSpectralIterations: 2
-  amplitude: 2
+  numberOfSpectralIterations: 1
+  amplitude: 15
   spectralMultiplier: 2
   meshMakers: []
   temp: {fileID: 0}
