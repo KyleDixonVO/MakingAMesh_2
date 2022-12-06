@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad31deb8fbbb0e14390f88780ea3dee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 1aeeb66f02d36ff49b12bcf00796a7ad, type: 2}
+  newVerticies: []
+  material: {fileID: 2100000, guid: 663834164c6a04740aaa1b778249ce7e, type: 2}
   showGizmos: 0
   xSpacing: 1
   zSpacing: 1

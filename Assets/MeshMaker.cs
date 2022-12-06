@@ -214,9 +214,19 @@ public class MeshMaker : MonoBehaviour
         }
     }
 
-    float PerlinNoise(float x, float y)
+    float PerlinNoise(float x, float z)
     {
-        return ((Mathf.PerlinNoise(x, y) * 2.0f) - 1f);
+        return ((Mathf.PerlinNoise(x, z) * 2.0f) - 1f);
+    }
+
+    float PerlinSpectral(float x, float z, float amplitude, float frequency, int numberOfIterations)
+    {
+        float result = 0.0f;
+        for (int i = 0; i < numberOfIterations; i++)
+        {
+            result += PerlinNoise(x * frequency, z * amplitude) * (frequency/numberOfIterations);
+        }
+        return result;
     }
 
     private void OnDrawGizmos()
