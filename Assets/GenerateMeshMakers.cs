@@ -12,6 +12,9 @@ public class GenerateMeshMakers : MonoBehaviour
     public float nodeSpacingX;
     public float nodeSpacingZ;
     public float frequency;
+    public float amplitude;
+    public int numberOfSpectralIterations;
+    public float spectralMultiplier;
 
     private void Awake()
     {

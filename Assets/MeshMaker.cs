@@ -21,7 +21,9 @@ public class MeshMaker : MonoBehaviour
     public int nodeAmountX = 10;
     public int nodeAmountZ = 10;
     public float frequency;
-    private float amplitude;
+    public float amplitude;
+    public float spectralMultiplier;
+    public int numberOfIterations;
 
     public float[,] Coordinates;
 
@@ -39,6 +41,7 @@ public class MeshMaker : MonoBehaviour
         UpdateMesh();
         gameObject.GetComponent<MeshRenderer>().material = material;
         showGizmos = false;
+        amplitude = 2;
     }
 
     // Update is called once per frame
@@ -62,12 +65,12 @@ public class MeshMaker : MonoBehaviour
     {
         newVerticies = new Vector3[(nodeAmountX * nodeAmountZ)];
         currentVertex = 0;
-        for (int x = 0; x <  nodeAmountX; x++)
+        for (int z = 0; z <  nodeAmountX; z++)
         {
-            for (int y = 0; y < nodeAmountZ; y++)
+            for (int x = 0; x < nodeAmountZ; x++)
             {
                 //Debug.Log("Assigning position to vertex: " + currentVertex);
-                newVerticies[currentVertex] = new Vector3(y * xSpacing, 0, x * zSpacing);
+                newVerticies[currentVertex] = new Vector3(x * xSpacing, 0, z * zSpacing);
                 currentVertex++;
             }
         }
@@ -208,23 +211,28 @@ public class MeshMaker : MonoBehaviour
     {
         for (int i = 0; i < newVerticies.Length; i++)
         {
-            amplitude = (1 / frequency);
-            newVerticies[i] = new Vector3(newVerticies[i].x, PerlinNoise(Time.time * frequency, Random.Range(0.0f, 10.0f)) * amplitude, newVerticies[i].z);
+            newVerticies[i] = new Vector3(newVerticies[i].x, PerlinSpectral(Time.time , newVerticies[i].z, amplitude, frequency, numberOfIterations, spectralMultiplier), newVerticies[i].z);
             i++;
         }
     }
 
-    float PerlinNoise(float x, float z)
+    float PerlinNoise(float x, float z, float frequency, float amplitude)
     {
-        return ((Mathf.PerlinNoise(x, z) * 2.0f) - 1f);
+        return ((Mathf.PerlinNoise(x * frequency, z * frequency) * 2.0f) - 1f) * amplitude;
     }
 
-    float PerlinSpectral(float x, float z, float amplitude, float frequency, int numberOfIterations)
+    float PerlinTurbulence(float x, float z, float frequency, float amplitude)
+    {
+        return (-Mathf.Abs(PerlinNoise(x, z, frequency, amplitude))) + amplitude;
+    }
+
+    float PerlinSpectral(float x, float z, float amplitude, float frequency, int numberOfIterations, float spectralMultiplier)
     {
         float result = 0.0f;
         for (int i = 0; i < numberOfIterations; i++)
         {
-            result += PerlinNoise(x * frequency, z * amplitude) * (frequency/numberOfIterations);
+            result += PerlinTurbulence(x, z, frequency, amplitude) * (frequency/((float)numberOfIterations * spectralMultiplier));
+            Debug.Log(result);
         }
         return result;
     }

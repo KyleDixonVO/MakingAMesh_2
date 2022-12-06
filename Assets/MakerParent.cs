@@ -11,6 +11,9 @@ public class MakerParent : MonoBehaviour
     public float zSpacing;
     public int meshesPerRow;
     public int numberOfRows;
+    public int numberOfSpectralIterations;
+    public float amplitude;
+    public float spectralMultiplier;
     public GameObject[] meshMakers;
     //public List<GameObject> meshMakers;
     public GameObject temp;
@@ -56,6 +59,9 @@ public class MakerParent : MonoBehaviour
                 meshMakers[meshNum].GetComponent<MeshMaker>().xSpacing = xSpacing;
                 meshMakers[meshNum].GetComponent<MeshMaker>().zSpacing = zSpacing;
                 meshMakers[meshNum].transform.position = new Vector3(j * xSpacing * (squaresPerMeshLength), 0, i * zSpacing * (squaresPerMeshLength));
+                meshMakers[meshNum].GetComponent<MeshMaker>().amplitude = amplitude;
+                meshMakers[meshNum].GetComponent<MeshMaker>().numberOfIterations = numberOfSpectralIterations;
+                meshMakers[meshNum].GetComponent<MeshMaker>().spectralMultiplier = spectralMultiplier;
                 meshNum++;
             }
         }
